@@ -1,6 +1,15 @@
 ---
 # tasks file for ocp_create_master_service_account
 
+- name: Check if SA account exists
+  shell: PATH=$PATH:/usr/local/bin oc describe sa "{{ sa_name|lower }}" -n "{{ project }}"
+  register: sa_exists
+  ignore_errors: yes
+  changed_when: False
+
+- debug:
+  msg: "{{sa_exists }}"
+
 - name: Create SA account
   shell: PATH=$PATH:/usr/local/bin oc create sa "{{ sa_name|lower }}" -n "{{ project }}"
 
