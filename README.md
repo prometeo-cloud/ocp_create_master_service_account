@@ -44,4 +44,5 @@ How to invoke the role from a playbook:
   vars:
     sa_name: automator
     cluster_role: cluster-admin
+    project: openshift-infra
 ```
