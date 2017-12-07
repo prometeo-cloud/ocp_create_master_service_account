@@ -21,7 +21,7 @@
 
 - name: Grab token contents
   slurp:
-    src: /root/"{{ project }}"-"{{ sa_name|lower }}"-token
+    src: "/root/{{ project }}-{{ sa_name|lower }}-token"
   register: token
 
 - name: save access token as a fact
