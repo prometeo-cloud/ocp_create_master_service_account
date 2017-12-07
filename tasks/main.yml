@@ -1,2 +1,13 @@
 ---
 # tasks file for ocp_create_master_service_account
+
+- name: Create SA account
+  command: oc create sa "{{ sa_name|lower }}" -n "{{ project }}"
+
+
+- name: Give role to account
+  command: oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:"{{ project }}":"{{ sa_name|lower }}"
+
+- name: Save access token to root directory
+  shell: oc sa get-token "{{ sa_name|lower }}" -n "{{ project }}" > /root/"{{ project }}"-"{{ sa_name|lower }}"-token
+

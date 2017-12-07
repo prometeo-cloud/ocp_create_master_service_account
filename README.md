@@ -1,38 +1,47 @@
-Role Name
-=========
+# ocp_create_master_service_account
 
-A brief description of the role goes here.
+## Description:
 
-Requirements
-------------
+This role creates a serviceaccount with a given cluster role.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Behaviour:
 
-Role Variables
---------------
+**Feature:** Add service account to OpenShift
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+As a PaaS Operator
+I want to postconfigure nodes
+so that nodes are ready for automation of tenant administration and other tasks
 
-Dependencies
-------------
+- **Scenario:** OCP cluster is configured with a service account
+- **Given:** a correctly deployed OCP cluster
+- **When:** the cluster has been deployed
+- **Then:** create the service account
+- **Then:** apply the required policy to the service account
+- **Then:** save the access token to a known file on the master for later retrieval
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Configuration:
 
-Example Playbook
-----------------
+A list of the external variables used by the role.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+| Variable  | Description  | Example  | 
+|---|---|---|
+| **sa_name**  | The service account to configure  |  (defaults to 'automator') |
+| **cluster_role**  | The cluster role to add to the SA  |  (defaults to 'cluster-admin') |
+| **project** | The cluster in which to create the SA | (defaults to 'openshift-infra') |
 
-    - hosts: servers
-      roles:
-         - { role: ocp_create_master_service_account, x: 42 }
+## Testing:
 
-License
--------
 
-BSD
 
-Author Information
-------------------
+## Usage:
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+How to invoke the role from a playbook:
+
+```yaml
+- name: Create SA
+  include_role:
+    name: ocp_create_master_service_account
+  vars:
+    sa_name: automator
+    cluster_role: cluster-admin
+```
