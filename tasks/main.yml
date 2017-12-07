@@ -26,7 +26,7 @@
 
 - name: save access token as a fact
   set_fact:
-    "{{ project|replace('-','_') }}_{{ sa_name|lower }}_token": "{{ token }}"
+    "{{ project|replace('-','_') }}_{{ sa_name|lower }}_token": "{{ token[content] }}"
 
 - debug:
     msg: "{{ project|replace('-','_') }}_{{ sa_name|lower }}_token"
