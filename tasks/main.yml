@@ -8,7 +8,7 @@
   changed_when: False
 
 - debug:
-  - msg: "{{ sa_exists }}"
+    msg: "{{ sa_exists }}"
 
 - name: Create SA account
   shell: PATH=$PATH:/usr/local/bin oc create sa "{{ sa_name|lower }}" -n "{{ project }}"
