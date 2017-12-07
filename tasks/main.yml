@@ -2,12 +2,12 @@
 # tasks file for ocp_create_master_service_account
 
 - name: Create SA account
-  shell: oc create sa "{{ sa_name|lower }}" -n "{{ project }}"
+  shell: PATH=$PATH:/usr/local/bin oc create sa "{{ sa_name|lower }}" -n "{{ project }}"
 
 
 - name: Give role to account
-  shell: oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:"{{ project }}":"{{ sa_name|lower }}"
+  shell: PATH=$PATH:/usr/local/bin oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:"{{ project }}":"{{ sa_name|lower }}"
 
 - name: Save access token to root directory
-  shell: oc sa get-token "{{ sa_name|lower }}" -n "{{ project }}" > /root/"{{ project }}"-"{{ sa_name|lower }}"-token
+  shell: PATH=$PATH:/usr/local/bin oc sa get-token "{{ sa_name|lower }}" -n "{{ project }}" > /root/"{{ project }}"-"{{ sa_name|lower }}"-token
 
