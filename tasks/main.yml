@@ -26,7 +26,7 @@
 
 - name: save access token as a fact
   set_fact:
-    "{{ project }}"-"{{ sa_name|lower}}"-token: "{{ token }}"
+    "{{ project }}-{{ sa_name|lower}}-token": "{{ token }}"
 
 - debug:
     msg: {{ project }}"-"{{ sa_name|lower}}"-token
