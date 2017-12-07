@@ -18,3 +18,15 @@
 - name: Save access token to root directory
   shell: PATH=$PATH:/usr/local/bin oc sa get-token "{{ sa_name|lower }}" -n "{{ project }}" > /root/"{{ project }}"-"{{ sa_name|lower }}"-token
   when: sa_exists.rc != 0
+
+- name: Grab token contents
+  slurp:
+    src: /root/"{{ project }}"-"{{ sa_name|lower }}"-token
+  register: token
+
+- name: save access token as a fact
+  set_fact:
+    "{{ project }}"-"{{ sa_name|lower}}"-token: "{{ token }}"
+
+- debug:
+    msg: {{ project }}"-"{{ sa_name|lower}}"-token
