@@ -28,5 +28,3 @@
   set_fact:
     automator_token: "{{ token['content']|b64decode }}"
 
-- debug:
-    msg: "{{ automator_token }}"
