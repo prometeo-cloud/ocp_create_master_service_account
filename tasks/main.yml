@@ -24,6 +24,9 @@
     src: "/root/{{ project }}_{{ sa_name|lower }}_token"
   register: token
 
+- debug:
+    msg: "{{ token }}"
+
 - name: save access token as a fact
   set_fact:
     "{{ project|replace('-','_') }}_{{ sa_name|lower }}_token": "{{ token['content'] | b64decode }}"
