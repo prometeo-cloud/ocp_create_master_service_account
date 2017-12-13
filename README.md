@@ -29,9 +29,6 @@ A list of the external variables used by the role.
 | **cluster_role**  | The cluster role to add to the SA  |  (defaults to 'cluster-admin') |
 | **project** | The cluster in which to create the SA | (defaults to 'openshift-infra') |
 
-## Testing:
-
-
 
 ## Usage:
 
@@ -46,3 +43,6 @@ How to invoke the role from a playbook:
     cluster_role: cluster-admin
     project: openshift-infra
 ```
+The role will save the token to a file in the root directory of the target host. The file is named: *<project>_<sa>_token*
+
+Additionally, the role sets a fact, *automator_token*, with the contents of the token.
